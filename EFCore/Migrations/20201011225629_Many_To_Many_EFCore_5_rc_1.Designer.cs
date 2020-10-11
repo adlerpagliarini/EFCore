@@ -4,18 +4,20 @@ using EFCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFCore.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20201011225629_Many_To_Many_EFCore_5_rc_1")]
+    partial class Many_To_Many_EFCore_5_rc_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns(1, 1)
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0-rc.1.20451.13");
 
@@ -47,7 +49,7 @@ namespace EFCore.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn(1, 1);
+                        .UseIdentityColumn();
 
                     b.Property<string>("DeveloperId")
                         .HasColumnType("nvarchar(450)");
@@ -69,7 +71,7 @@ namespace EFCore.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn(1, 1);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -80,27 +82,12 @@ namespace EFCore.Migrations
                     b.ToTable("Skill");
                 });
 
-            modelBuilder.Entity("EFCore.Domain.Tasks.SkillTaskToDo", b =>
-                {
-                    b.Property<long>("SkillsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("TasksToDoId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("SkillsId", "TasksToDoId");
-
-                    b.HasIndex("TasksToDoId");
-
-                    b.ToTable("SkillTaskToDo");
-                });
-
             modelBuilder.Entity("EFCore.Domain.Tasks.TaskToDo", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn(1, 1);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("DeadLine")
                         .HasColumnType("datetime2");
@@ -123,6 +110,21 @@ namespace EFCore.Migrations
                     b.HasIndex("DeveloperId");
 
                     b.ToTable("TaskToDo");
+                });
+
+            modelBuilder.Entity("SkillTaskToDo", b =>
+                {
+                    b.Property<long>("SkillsId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TasksToDoId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("SkillsId", "TasksToDoId");
+
+                    b.HasIndex("TasksToDoId");
+
+                    b.ToTable("SkillTaskToDo");
                 });
 
             modelBuilder.Entity("EFCore.Domain.Developers.BackEndDeveloper", b =>
@@ -168,30 +170,26 @@ namespace EFCore.Migrations
                         .HasForeignKey("EFCore.Domain.Motivations.Motivation", "DeveloperId");
                 });
 
-            modelBuilder.Entity("EFCore.Domain.Tasks.SkillTaskToDo", b =>
-                {
-                    b.HasOne("EFCore.Domain.Tasks.Skill", "Skill")
-                        .WithMany()
-                        .HasForeignKey("SkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EFCore.Domain.Tasks.TaskToDo", "TaskToDo")
-                        .WithMany()
-                        .HasForeignKey("TasksToDoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Skill");
-
-                    b.Navigation("TaskToDo");
-                });
-
             modelBuilder.Entity("EFCore.Domain.Tasks.TaskToDo", b =>
                 {
                     b.HasOne("EFCore.Domain.Developers.Developer", null)
                         .WithMany("TasksToDo")
                         .HasForeignKey("DeveloperId");
+                });
+
+            modelBuilder.Entity("SkillTaskToDo", b =>
+                {
+                    b.HasOne("EFCore.Domain.Tasks.Skill", null)
+                        .WithMany()
+                        .HasForeignKey("SkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EFCore.Domain.Tasks.TaskToDo", null)
+                        .WithMany()
+                        .HasForeignKey("TasksToDoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EFCore.Domain.Developers.FullStackDeveloper", b =>

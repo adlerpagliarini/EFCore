@@ -28,7 +28,6 @@ namespace EFCore.Infrastructure
             modelBuilder.ApplyConfiguration(new FullStackDeveloperMap());
             modelBuilder.ApplyConfiguration(new TaskToDoMap());
             modelBuilder.ApplyConfiguration(new SkillMap());
-            modelBuilder.ApplyConfiguration(new SkillTaskToDoMap());
 
             base.OnModelCreating(modelBuilder);
         }

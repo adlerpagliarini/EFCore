@@ -14,7 +14,7 @@ namespace EFCore.Domain.Tasks
             DeadLine = deadLine;
             Status = status;
             DeveloperId = developerId;
-            Skills = new Collection<SkillTaskToDo>();
+            Skills = new Collection<Skill>();
         }
 
         protected TaskToDo() { }
@@ -25,13 +25,12 @@ namespace EFCore.Domain.Tasks
         public bool Status { get; protected set; }
         public DevCode DeveloperId { get; protected set; }
 
-        public virtual Collection<SkillTaskToDo> Skills { get; protected set; }
+        public virtual Collection<Skill> Skills { get; protected set; }
 
         public void SetSkill(Skill skill)
         {
             if (skill is null) return;
-            var _skill = new SkillTaskToDo(skill, this);
-            Skills.Add(_skill);
+            Skills.Add(skill);
         }
     }
 }

@@ -15,6 +15,10 @@ namespace EFCore.Infrastructure.Mappings
             builder.Property(p => p.Status).IsRequired();
 
             builder.HasOne<Developer>().WithMany(e => e.TasksToDo).HasForeignKey(k => k.DeveloperId);
+            builder.HasMany(e => e.Skills).WithMany(e => e.TasksToDo)
+                .UsingEntity<SkillTaskToDo>(
+                    right => right.HasOne(e => e.Skill).WithMany().HasForeignKey(e => e.SkillsId),
+                    left => left.HasOne(e => e.TaskToDo).WithMany().HasForeignKey(e => e.TasksToDoId));
         }
     }
 }

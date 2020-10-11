@@ -29,7 +29,6 @@ namespace EFCore.Controllers
                     .Include(e => e.Motivation)
                     .Include(e => e.TasksToDo)
                         .ThenInclude(e => e.Skills)
-                            .ThenInclude(e => e.Skill)
                 .ToListAsync();
 
             response.ForEach(e => e.HowIAm());
@@ -44,7 +43,6 @@ namespace EFCore.Controllers
                     .Include(e => e.Motivation)
                     .Include(e => e.TasksToDo)
                         .ThenInclude(e => e.Skills)
-                            .ThenInclude(e => e.Skill)
                 .ToListAsync();
 
             response.ForEach(e => e.HowIAm());
@@ -59,7 +57,6 @@ namespace EFCore.Controllers
                     .Include(e => e.Motivation)
                     .Include(e => e.TasksToDo)
                         .ThenInclude(e => e.Skills)
-                            .ThenInclude(e => e.Skill)
                 .ToListAsync();
 
             response.ForEach(e => e.HowIAm());
@@ -74,7 +71,6 @@ namespace EFCore.Controllers
                     .Include(e => e.Motivation)
                     .Include(e => e.TasksToDo)
                         .ThenInclude(e => e.Skills)
-                            .ThenInclude(e => e.Skill)
                 .ToListAsync();
 
             response.ForEach(e => e.HowIAm());
@@ -93,10 +89,6 @@ namespace EFCore.Controllers
                 foreach (var taskToDo in developer.TasksToDo)
                 {
                     _databaseContext.Entry(taskToDo).Collection(e => e.Skills).Load();
-                    foreach (var skill in taskToDo.Skills)
-                    {
-                        _databaseContext.Entry(skill).Reference(e => e.Skill).Load();
-                    }
                 }
             }
             developers.ToList().ForEach(e => e.HowIAm());

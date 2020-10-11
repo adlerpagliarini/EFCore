@@ -9,14 +9,14 @@ namespace EFCore.Domain.Tasks
         public Skill(string title)
         {
             Title = title;
-            TasksToDo = new Collection<SkillTaskToDo>();
+            TasksToDo = new Collection<TaskToDo>();
         }
 
         protected Skill() { }
 
         public string Title { get; protected set; }
 
-        public virtual Collection<SkillTaskToDo> TasksToDo { get; protected set; }
+        public virtual Collection<TaskToDo> TasksToDo { get; protected set; }
 
         public override bool IsValid()
         {

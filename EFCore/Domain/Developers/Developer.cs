@@ -33,7 +33,7 @@ namespace EFCore.Domain.Developers
         public void AddItemToDo(TaskToDo todo)
         {
             var _todo = new TaskToDo(todo.Title, todo.Start, todo.DeadLine, todo.Status, todo.DeveloperId);
-            todo.Skills.ToList().ForEach(e => _todo.SetSkill(e.Skill));
+            todo.Skills.ToList().ForEach(e => _todo.SetSkill(e));
             _tasksToDo.Add(_todo);
         }
 

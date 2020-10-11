@@ -4,18 +4,20 @@ using EFCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFCore.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20201011231746_Middle_Many_To_Many_EFCore_5_rc_1")]
+    partial class Middle_Many_To_Many_EFCore_5_rc_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns(1, 1)
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0-rc.1.20451.13");
 
@@ -47,7 +49,7 @@ namespace EFCore.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn(1, 1);
+                        .UseIdentityColumn();
 
                     b.Property<string>("DeveloperId")
                         .HasColumnType("nvarchar(450)");
@@ -69,7 +71,7 @@ namespace EFCore.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn(1, 1);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -100,7 +102,7 @@ namespace EFCore.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn(1, 1);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("DeadLine")
                         .HasColumnType("datetime2");
