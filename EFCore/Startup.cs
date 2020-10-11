@@ -31,7 +31,7 @@ namespace EFCore
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "EF Core 3.1.8",
+                        Title = "EF Core 5 rc1",
                         Version = "v1"
                     });
             });
