@@ -9,7 +9,7 @@ namespace EFCore.Infrastructure.Mappings
         public void Configure(EntityTypeBuilder<FullStackDeveloper> builder)
         {
             builder.OwnsOne(e => e.ExtraMotivation).Property(e => e.Factor).HasColumnType("varchar(50)");
-            // builder.ToTable(nameof(FullStackDeveloper));
+            builder.ToTable(nameof(FullStackDeveloper));
         }
     }
 }

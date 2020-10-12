@@ -8,7 +8,7 @@ namespace EFCore.Infrastructure.Mappings
     {
         public void Configure(EntityTypeBuilder<BackEndDeveloper> builder)
         {
-            // builder.ToTable(nameof(BackEndDeveloper));
+            builder.ToTable(nameof(BackEndDeveloper));
         }
     }
 }
